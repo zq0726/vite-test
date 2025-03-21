@@ -12,7 +12,8 @@
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
     "format": "prettier --write src/",
-    "deploy": "bash deploy.sh"
+    "deploy": "bash deploy.sh",
+    "build-add-deploy":"run-s build deploy --"
   },
   "dependencies": {
     "pinia": "^2.2.6",
