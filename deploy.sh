@@ -1,26 +1,21 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-# 发生错误时终止
+# 强制路径兼容 Windows
 set -e
-
-# 构建
+rm -rf dist/*
 npm run build
 
-# 进入构建文件夹
 cd dist
 
-# 如果你要部署到自定义域名
-# echo 'www.example.com' > CNAME
+rm -rf .git  # <--- 添加这行解决重复初始化问题
+
 
 git init
 git checkout -b main
 git add -A
-git commit -m 'deploy'
+git commit -m "Deploy: $(date +'%Y-%m-%d %H:%M:%S')"
 
-# 如果你要部署在 https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
-
-# 如果你要部署在 https://<USERNAME>.github.io/<REPO>
+# 使用 Windows 格式路径（反斜杠转义）
 git push -f https://github.com/zq0726/vite-test.git main:gh-pages
 
-cd -
+cd ..
